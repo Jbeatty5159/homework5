@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
+
+  <body>
+    <header class="jumbotron">
+      <h1 class="display-3">Work Day Scheduler</h1>
+      <p class="lead">A simple calendar app for scheduling your work day</p>
+      <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="container">
+      <!-- Timeblocks go here -->
+
+       <div id = "9" class="row time-block">
+         <div class="hour col-md-1">
+           9am
+         </div>
+         <textarea class= "col-md-10 description"></textarea>
+         <button class = "btn saveBtn col-md-1">save</button>
+
+       </div>
+       <div id = "10" class="row time-block">
+        <div class="hour col-md-1">
+          10am
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "11" class="row time-block">
+        <div class="hour col-md-1">
+          11am
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "12" class="row time-block">
+        <div class="hour col-md-1">
+          12pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "13" class="row time-block">
+        <div class="hour col-md-1">
+          1pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "14" class="row time-block">
+        <div class="hour col-md-1">
+          2pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "15" class="row time-block">
+        <div class="hour col-md-1">
+          3pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "16" class="row time-block">
+        <div class="hour col-md-1">
+          4pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+      <div id = "17" class="row time-block">
+        <div class="hour col-md-1">
+          5pm
+        </div>
+        <textarea class= "col-md-10 description"></textarea>
+        <button class = "btn saveBtn col-md-1">save</button>
+
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        const test= false;
+
+        const now = moment().format('MMMM Do YYYY');
+
+        let nowHour24 = moment().format("H");
+        let nowHour12 = moment().format("h");
+
+        if(test) {
+          nowHour24 = 13;
+          nowHour12 = 1;
+
+        }
+        $('.time-block').each(function(){
+          let currentHour = moment().hours()
+          let calendarHour = parseInt($(this).attr('id'));
+          if (calendarHour<currentHour){
+            $(this).addClass('past');
+          }
+          else if (calendarHour===currentHour){
+            $(this).removeClass('past');
+            $(this).addClass('present');
+          }
+          else {
+            $(this).removeClass('past');
+            $(this).removeClass('present');
+            $(this).addClass('future');
+          }
+        })
+
+
+        $(".saveBtn").on('click',function(){
+         let text = $(this).siblings('textarea').val();
+         let time = $(this).parent().attr('id');
+         localStorage.setItem(time,text);
+          
+        });
+         $('#9 textarea').val(localStorage.getItem('9'));
+         $('#10 textarea').val(localStorage.getItem('10'));
+         $('#11 textarea').val(localStorage.getItem('11'));
+         $('#12 textarea').val(localStorage.getItem('12'));
+         $('#13 textarea').val(localStorage.getItem('13'));
+         $('#14 textarea').val(localStorage.getItem('14'));
+         $('#15 textarea').val(localStorage.getItem('15'));
+         $('#16 textarea').val(localStorage.getItem('16'));
+         $('#17 textarea').val(localStorage.getItem('17'));
+
+      })
+
+    </script>
+  </body>
+</html>
